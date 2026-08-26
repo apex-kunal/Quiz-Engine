@@ -29,9 +29,11 @@ const mcQuestion = { type: "mc", correct: "Value and type" };
 const tfQuestion = { type: "tf", correct: true };
 const shortQuestion = { type: "short", correct: "Paris" };
 
-console.log(isCorrect(mcQuestion, "Value and type"));  // expect: ?
-console.log(isCorrect(mcQuestion, "Value only"));       // expect: ?
-console.log(isCorrect(tfQuestion, true));                // expect: ?
-console.log(isCorrect(tfQuestion, false));               // expect: ?
-console.log(isCorrect(shortQuestion, " paris "));         // expect: ?
-console.log(isCorrect(shortQuestion, "London"));          // expect: ?
+
+// just some test cases
+// console.log(isCorrect(mcQuestion, "Value and type"));
+// console.log(isCorrect(mcQuestion, "Value only"));       
+// console.log(isCorrect(tfQuestion, true));           
+// console.log(isCorrect(tfQuestion, false));               
+// console.log(isCorrect(shortQuestion, " paris "));         
+// console.log(isCorrect(shortQuestion, "London"));          
