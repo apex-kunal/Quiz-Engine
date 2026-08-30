@@ -73,3 +73,23 @@ function percent(score,total){
 function didPassed(score,total,passMark){
   return percent(score,total) >= passMark;
 }
+// CORE logic worth understanding 
+// All the questions are in the form of an object we will be using a singleton array of objects {QUESTIONS_BANK} that will hold many question objects ... so a separate file will be used that will only hold the array of question object. 
+// the main problem is that for each round a random question obejct should be drawn out of the the original array 
+// to solve this probelm will be particulary using a copy of the original array and shuffling that copied array and then applying the "Fisher Yates" algorithm that will choose a random index of the copied array which will be having a particular question object {i.e., a question} for the user himself to answer 
+
+function shuffle(arr){ // uses fisher yates algorithm
+  console.log("Shuffling !"); 
+  const copy_arr = arr.slice()
+  for(let i = copy_arr.length - 1; i > 0; i--){ // start from the last index of the original array 
+    const j = Math.floor(Math.random() * (i + 1)); // calculates a random index from 0 to i 
+    // swap the copy[i] and copy[j]
+    const temp = copy_arr[i]; // a temp variable to hold and save the current index value of the original array 
+    copy_arr[i] = copy_arr[j]; // overwrite the index from the original to copied 
+    copy_arr[j] = temp; // now finally save the the value into the index
+  }
+  return copy_arr; // return the copied array 
+}
+// just testing
+console.log(shuffle([10,20,30,40,50,60]));
+
