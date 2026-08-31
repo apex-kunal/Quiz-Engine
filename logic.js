@@ -92,19 +92,3 @@ function shuffle(arr){ // uses fisher yates algorithm
 }
 // just testing
 console.log(shuffle([10,20,30,40]));
-
-
-
-
-const state = {
-  questions: QUESTION_BANK,
-  currentIndex: 0,
-  score: 0,
-  attempts: [],
-  status: "playing",
-  passMark: 70
-};
-
-console.log(state.questions[0]);
-
-
