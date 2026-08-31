@@ -94,33 +94,7 @@ function shuffle(arr){ // uses fisher yates algorithm
 console.log(shuffle([10,20,30,40]));
 
 
-// QUESTION BANK
-const QUESTION_BANK = [
-  {
-    id: "q1",
-    type: "short",
-    prompt: "who is more smart ?",
-    choices: [],   // mc/tf only
-    correct: "kunal",
-    explanation: "yes kunal is smartest"
-  },
-  {
-    id: "q2",
-    type: "tf",
-    prompt: "is kunal smart ?",
-    choices: [true,false],   // mc/tf only
-    correct: true,
-    explanation: "yes kunal is smartest"
-  },
-  {
-    id: "q3",
-    type: "mc",
-    prompt: "what is kunal's height?",
-    choices: ["5'0","5'3","5'8","6'0"],   // mc/tf only
-    correct: "5'8",
-    explanation: "yes kunal is smartest"
-  },
-]
+
 
 const state = {
   questions: QUESTION_BANK,
