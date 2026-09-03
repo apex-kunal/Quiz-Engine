@@ -31,7 +31,8 @@ const QUESTION_BANK = [
 
 // the overal state of the web app after each round the state will be updated
 const state = {
-  questions: QUESTION_BANK,
+  // call shuffle function from logic js to shuffle the question bank array
+  questions: shuffle(QUESTION_BANK),
   currentIndex: 0,
   score: 0,
   attempts: [],
@@ -40,4 +41,4 @@ const state = {
 };
 
 // just testing
-console.log(state.questions[0]);
+// console.log(state.questions[0]);
