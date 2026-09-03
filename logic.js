@@ -90,5 +90,5 @@ function shuffle(arr){ // uses fisher yates algorithm
   }
   return copy_arr; // return the copied array 
 }
-// // just testing
+// just testing
 // console.log(shuffle([10,20,30,40]));
