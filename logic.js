@@ -46,9 +46,9 @@ function isCorrect(question,given){
     return given === question.correct;
   }
 }
-const mcQuestion = { type: "mc", correct: "Value and type" };
-const tfQuestion = { type: "tf", correct: true };
-const shortQuestion = { type: "short", correct: "Paris" };
+// const mcQuestion = { type: "mc", correct: "Value and type" };
+// const tfQuestion = { type: "tf", correct: true };
+// const shortQuestion = { type: "short", correct: "Paris" };
 
 
 // just some test cases
