@@ -1,7 +1,7 @@
 // DOM manipulation to be done here to change the state of the overall app 
 const app = document.getElementById('app');
 
-function renderQuestion(){
+function renderQuestion(state){
 
   // get the current question from the state obj
   const currentQuestion = state.questions[state.currentIndex]
@@ -71,6 +71,36 @@ function submitAnswer(given){
     state.currentIndex += 1;
   }
 
-  renderQuestion(state)
+  if (state.status === "done") {
+  renderResults(state);
+} else {
+  renderQuestion(state);
 }
+console.log(state);
+}
+
+function renderResults(state){
+
+  app.innerHTML = ""
+
+  const percentScore = percent(state.score,state.questions.length);
+  const passed = didPassed(state.score,state.questions.length,state.passMark);
+
+  const heading = document.createElement('h2');
+  heading.textContent = `You scored ${state.score} out of ${state.questions.length}`
+  const score = document.createElement('h2');
+  score.textContent = `${percentScore}%`;
+  const result = document.createElement('h3');
+  if(passed){
+    result.textContent = "Passed"
+  } else {
+    result.textContent = "Failed"
+  }
+
+  app.appendChild(heading)
+  app.appendChild(score)
+  app.appendChild(result)
+}
+
+renderQuestion(state)
 
