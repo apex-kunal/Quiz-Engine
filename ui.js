@@ -97,9 +97,42 @@ function renderResults(state){
     result.textContent = "Failed"
   }
 
+  const reviewBtn = document.createElement('button');
+  reviewBtn.textContent = "Review mistakes";
+  reviewBtn.onclick = function(){
+    state.status = "reivew"
+    renderReview(state);
+  };
+
   app.appendChild(heading)
   app.appendChild(score)
   app.appendChild(result)
+  app.appendChild(reviewBtn)
+}
+
+function renderReview(state){
+  app.innerHTML = "";
+  const wrong = wrongAttempts(state.attempts);
+
+  for(let i = 0;i < wrong.length; i++){
+    const attempt = wrong[i];
+    const matchingQuestion = state.questions.find(q => q.id === attempt.questionId);
+    const heading = document.createElement('h3')
+    heading.textContent = matchingQuestion.prompt
+    const para = document.createElement('p')
+    para.textContent = `You answered: ${attempt.given}, but the correct answer was: ${matchingQuestion.correct}, here's a brief explanation: ${matchingQuestion.explanation}`;
+
+    app.appendChild(heading);
+    app.appendChild(para);
+  }
+
+  const backBtn = document.createElement('button');
+  backBtn.textContent = "Back to results"
+  backBtn.onclick = function() {
+    state.status = "done";
+    renderResults(state);
+  };
+  app.appendChild(backBtn);
 }
 
 renderQuestion(state)

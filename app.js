@@ -40,5 +40,13 @@ const state = {
   passMark: 70,
 };
 
+// attempt obj 
+// {
+//   questionId: "q1",
+//   given: "Value only",
+//   isCorrect: false,
+//   skipped: false
+// }
+
 // just testing
 // console.log(state.questions[0]);
