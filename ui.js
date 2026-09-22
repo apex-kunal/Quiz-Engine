@@ -53,13 +53,13 @@ function renderQuestion(state){
 function submitAnswer(given){
   const currentQuestion = state.questions[state.currentIndex];
   const correct = isCorrect(currentQuestion,given);
-  const attempt = {
+  const attempt = { // create an attempt obj for each round
     questionId: currentQuestion.id,
     given,
     isCorrect: correct,
     skipped: false
   }
-
+  // update the score per attempt
   state.attempts.push(attempt);
   if(correct){
     state.score += 1
@@ -97,6 +97,7 @@ function renderResults(state){
     result.textContent = "Failed"
   }
 
+  // added the review button 
   const reviewBtn = document.createElement('button');
   reviewBtn.textContent = "Review mistakes";
   reviewBtn.onclick = function(){
@@ -104,10 +105,23 @@ function renderResults(state){
     renderReview(state);
   };
 
+  // add the play again button to reset the overall state
+  const playAgainBtn = document.createElement('button');
+  playAgainBtn.textContent = "Play again";
+  playAgainBtn.onclick = function(){
+    state.questions = shuffle(QUESTION_BANK);
+    state.currentIndex = 0;
+    state.score = 0;
+    state.attempts = [];
+    state.status = "playing";
+    renderQuestion(state);
+  }
+
   app.appendChild(heading)
   app.appendChild(score)
   app.appendChild(result)
   app.appendChild(reviewBtn)
+  app.appendChild(playAgainBtn)
 }
 
 function renderReview(state){
