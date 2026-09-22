@@ -92,3 +92,11 @@ function shuffle(arr){ // uses fisher yates algorithm
 }
 // just testing
 // console.log(shuffle([10,20,30,40]));
+
+
+// function for wrong attempts
+function wrongAttempts(attempts){
+  return attempts.filter(function (a) {
+    return !a.isCorrect && !a.skipped
+  })
+}
