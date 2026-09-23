@@ -38,6 +38,8 @@ const state = {
   attempts: [],
   status: "playing",
   passMark: 70,
+  timeLeft: 20,
+  timerId: null, // new for timer 
 };
 
 // attempt obj 
