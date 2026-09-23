@@ -1,7 +1,41 @@
 // DOM manipulation to be done here to change the state of the overall app 
 const app = document.getElementById('app');
 
+// grab the timer 
+const timerDisplay = document.getElementById('timer')
+
+// bluprint for a 60 second timer countdown for per question 
+// function startQuiz(){
+//   state.timerId = setInterval(function() {
+//     state.timeLeft -= 1;
+//     if (state.timeLeft === 0){
+//       state.status = "done";
+//       renderResults(state);
+//       clearInterval(state.timeLeft);
+//     }
+//     console.log(state.timeLeft)
+//   }, 1000);
+
+//   renderQuestion(state)
+// }
+
 function renderQuestion(state){
+
+  // timer logic goes here at the top of render question 
+
+  clearInterval(state.timerId)
+  state.timeLeft = 20;
+
+  state.timerId = setInterval(function() {
+    state.timeLeft -= 1;
+    timerDisplay.textContent = state.timeLeft
+
+    if(state.timeLeft === 0){
+      clearInterval(state.timerId);
+      skipQuestion();
+    }
+  }, 1000);
+
 
   // get the current question from the state obj
   const currentQuestion = state.questions[state.currentIndex]
@@ -51,6 +85,10 @@ function renderQuestion(state){
 }
 
 function submitAnswer(given){
+
+  // clear the timer 
+  clearInterval(state.timerId);
+
   const currentQuestion = state.questions[state.currentIndex];
   const correct = isCorrect(currentQuestion,given);
   const attempt = { // create an attempt obj for each round
@@ -79,7 +117,33 @@ function submitAnswer(given){
 console.log(state);
 }
 
+function skipQuestion(){
+  const currentQuestion = state.questions[state.currentIndex];
+  const attempt = {
+    questionId: currentQuestion.id,
+    given: null,
+    isCorrect: false,
+    skipped: true
+  };
+  state.attempts.push(attempt);
+  // no need to change the score since the question here is begin skipped
+
+  if(state.currentIndex + 1 >= state.questions.length){
+    state.status = "done"
+  } else {
+    state.currentIndex += 1;
+  }
+
+  if(state.status === "done"){
+    renderResults(state);
+  } else {
+    renderQuestion(state)
+  }
+}
+
 function renderResults(state){
+  // clear the displayy timer 
+  timerDisplay.textContent = ""
 
   app.innerHTML = ""
 
@@ -125,6 +189,10 @@ function renderResults(state){
 }
 
 function renderReview(state){
+
+  // clear the display timer 
+  timerDisplay.textContent = ""
+  
   app.innerHTML = "";
   const wrong = wrongAttempts(state.attempts);
 
