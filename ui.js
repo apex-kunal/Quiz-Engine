@@ -161,7 +161,7 @@ function renderResults(state){
     result.textContent = "Failed"
   }
 
-  // added the review button 
+  // added the review button to call the renderReview function
   const reviewBtn = document.createElement('button');
   reviewBtn.textContent = "Review mistakes";
   reviewBtn.onclick = function(){
@@ -181,11 +181,26 @@ function renderResults(state){
     renderQuestion(state);
   }
 
+  // nameInput and saveBtn for saving the in localStorage for saveHighScore function 
+  const nameInput = document.createElement('input');
+  nameInput.type = "text";
+  nameInput.placeholder = "Enter your name";
+
+  const saveBtn = document.createElement('button');
+  saveBtn.textContent = "Save score";
+  saveBtn.onclick = function(){
+    // call the saveHighScore function
+    saveHightScore(nameInput.value);
+  }
+
+
   app.appendChild(heading)
   app.appendChild(score)
   app.appendChild(result)
   app.appendChild(reviewBtn)
   app.appendChild(playAgainBtn)
+  app.appendChild(nameInput)
+  app.appendChild(saveBtn)
 }
 
 function renderReview(state){
@@ -218,4 +233,32 @@ function renderReview(state){
 }
 
 // renderQuestion(state) not needed here annymore 
+
+function saveHightScore(name){
+  if(!name){
+    return 
+  }
+  const highScores = JSON.parse(localStorage.getItem("quizHighScores")) || [];
+
+  // for a new record 
+  const newRecord = {
+    name: name,
+    score: state.score,
+    total: state.questions.length,
+    percent: percent(state.score,state.questions.length),
+    date: new Date().toLocaleDateString()
+  }
+
+
+  highScores.push(newRecord)
+
+  highScores.sort(function(a,b){
+    return b.percent - a.percent;
+  })
+
+  const top5 = highScores.slice(0,5);
+
+  localStorage.setItem("quizHighScores",JSON.stringify(top5));
+  alert("Score saved !")
+}
 
