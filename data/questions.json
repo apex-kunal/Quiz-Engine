@@ -2,25 +2,121 @@
   {
     "id": "q1",
     "type": "mc",
-    "prompt": "is this a mc question ?",
-    "choices": ["A","B","C","D"],
-    "correct": "A",
-    "explanation": "A is correct"
+    "prompt": "What does the === operator check in JavaScript?",
+    "choices": ["Value only", "Type only", "Value and type", "Neither"],
+    "correct": "Value and type",
+    "explanation": "=== is strict equality — it compares both the value and the data type, unlike == which allows type conversion first."
   },
   {
     "id": "q2",
     "type": "tf",
-    "prompt": "is this a tf question ?",
-    "choices": [true,false],
+    "prompt": "In JavaScript, typeof null returns \"object\".",
+    "choices": [true, false],
     "correct": true,
-    "explanation": "yes it is a tf question"
-  }, 
+    "explanation": "This is a long-standing quirk in JavaScript — typeof null has returned \"object\" since the language's earliest versions, even though null is its own primitive type."
+  },
   {
     "id": "q3",
     "type": "short",
-    "prompt": "Is this a short question ?",
+    "prompt": "Which method converts a JSON string into a real JavaScript object?",
     "choices": [],
-    "correct": "yes it is",
-    "explanation": "yees it is a short question"
+    "correct": "JSON.parse",
+    "explanation": "JSON.parse() takes a JSON-formatted string and turns it back into a usable JavaScript object or array."
+  },
+  {
+    "id": "q4",
+    "type": "mc",
+    "prompt": "Which array method transforms every element and returns a new array of the same length?",
+    "choices": ["filter", "map", "reduce", "find"],
+    "correct": "map",
+    "explanation": "map() applies a function to every item and always returns a new array with exactly as many items as the original."
+  },
+  {
+    "id": "q5",
+    "type": "tf",
+    "prompt": "The Array.filter() method mutates (changes) the original array.",
+    "choices": [true, false],
+    "correct": false,
+    "explanation": "filter() returns a brand new array containing only the items that pass the test — the original array is left untouched."
+  },
+  {
+    "id": "q6",
+    "type": "short",
+    "prompt": "What is the capital city of France?",
+    "choices": [],
+    "correct": "Paris",
+    "explanation": "Paris has been the capital of France since the late 10th century."
+  },
+  {
+    "id": "q7",
+    "type": "mc",
+    "prompt": "Which HTTP method is typically used to request data from a server without sending any?",
+    "choices": ["POST", "GET", "DELETE", "PUT"],
+    "correct": "GET",
+    "explanation": "GET requests are used to retrieve data. POST is generally used to create or send new data to the server."
+  },
+  {
+    "id": "q8",
+    "type": "tf",
+    "prompt": "A variable declared with const can later be reassigned to a different value.",
+    "choices": [true, false],
+    "correct": false,
+    "explanation": "const creates a binding that cannot be reassigned. If it holds an object or array, though, the contents inside can still be changed."
+  },
+  {
+    "id": "q9",
+    "type": "short",
+    "prompt": "In what year was JavaScript originally created?",
+    "choices": [],
+    "correct": "1995",
+    "explanation": "JavaScript was created by Brendan Eich in 1995 while he was working at Netscape."
+  },
+  {
+    "id": "q10",
+    "type": "mc",
+    "prompt": "Who is credited with creating JavaScript?",
+    "choices": ["Guido van Rossum", "Brendan Eich", "Tim Berners-Lee", "James Gosling"],
+    "correct": "Brendan Eich",
+    "explanation": "Brendan Eich wrote the first version of JavaScript in just ten days in 1995."
+  },
+  {
+    "id": "q11",
+    "type": "tf",
+    "prompt": "Python and JavaScript are the same programming language.",
+    "choices": [true, false],
+    "correct": false,
+    "explanation": "They're entirely different languages with different syntax, runtimes, and typical use cases, despite the similar-sounding names."
+  },
+  {
+    "id": "q12",
+    "type": "short",
+    "prompt": "What does CSS stand for?",
+    "choices": [],
+    "correct": "Cascading Style Sheets",
+    "explanation": "CSS controls the visual presentation of HTML — layout, color, spacing, typography, and more."
+  },
+  {
+    "id": "q13",
+    "type": "mc",
+    "prompt": "Which planet is known as the Red Planet?",
+    "choices": ["Venus", "Jupiter", "Mars", "Saturn"],
+    "correct": "Mars",
+    "explanation": "Mars appears red due to iron oxide (rust) covering much of its surface."
+  },
+  {
+    "id": "q14",
+    "type": "tf",
+    "prompt": "The sun rises in the west.",
+    "choices": [true, false],
+    "correct": false,
+    "explanation": "The sun rises in the east and sets in the west, due to the direction of Earth's rotation."
+  },
+  {
+    "id": "q15",
+    "type": "short",
+    "prompt": "What is 5 + 7?",
+    "choices": [],
+    "correct": "12",
+    "explanation": "Basic addition: 5 + 7 = 12."
   }
 ]
