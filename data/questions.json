@@ -1,0 +1,26 @@
+[
+  {
+    "id": "q1",
+    "type": "mc",
+    "prompt": "is this a mc question ?",
+    "choices": ["A","B","C","D"],
+    "correct": "A",
+    "explanation": "A is correct"
+  },
+  {
+    "id": "q2",
+    "type": "tf",
+    "prompt": "is this a tf question ?",
+    "choices": [true,false],
+    "correct": true,
+    "explanation": "yes it is a tf question"
+  }, 
+  {
+    "id": "q3",
+    "type": "short",
+    "prompt": "Is this a short question ?",
+    "choices": [],
+    "correct": "yes it is",
+    "explanation": "yees it is a short question"
+  }
+]

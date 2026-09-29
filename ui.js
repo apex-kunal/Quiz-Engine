@@ -217,5 +217,5 @@ function renderReview(state){
   app.appendChild(backBtn);
 }
 
-renderQuestion(state)
+// renderQuestion(state) not needed here annymore 
 
