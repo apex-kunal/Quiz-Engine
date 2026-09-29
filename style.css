@@ -1,0 +1,234 @@
+/* ==========================================================================
+   Quiz Engine — "Exam Paper" theme
+   Cool paper background, ink navy text, a ticking stopwatch timer badge,
+   and clear graded-pen colors for correct/incorrect/pass/fail feedback.
+   ========================================================================== */
+
+:root {
+  --paper: #eef1f6;
+  --paper-card: #ffffff;
+  --ink: #1b2430;
+  --ink-soft: #5b6472;
+  --line: #d7dce5;
+
+  --accent: #3454d1;      /* primary actions */
+  --accent-dark: #2a44ac;
+  --correct: #2f7a4f;      /* pass / correct answers */
+  --incorrect: #c1272d;    /* fail / wrong answers */
+  --warning: #c98a1f;      /* timer running low */
+
+  --font-serif: Georgia, "Times New Roman", serif;
+  --font-sans: "Segoe UI", system-ui, -apple-system, sans-serif;
+  --font-mono: "Consolas", "SF Mono", "Courier New", monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  line-height: 1.5;
+  display: flex;
+  justify-content: center;
+  padding: 40px 16px 80px;
+}
+
+/* ---- Layout: single centered column, ~40rem, per the plan ---- */
+#app {
+  width: 100%;
+  max-width: 40rem;
+}
+
+/* #timer is pulled OUT of the normal document flow with fixed positioning,
+   pinned to a corner. This is deliberate: since #timer and #app are
+   separate sibling elements (not nested), keeping #timer in normal flow
+   next to #app causes flex/height quirks (they'd stretch to match each
+   other). Fixed positioning sidesteps that entirely and reads like a real
+   exam-room clock on the wall. */
+#timer {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 10;
+}
+
+/* ---- The timer badge — the signature element ---- */
+#timer:not(:empty) {
+  display: inline-flex;
+  padding: 6px 16px;
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+  background: var(--paper-card);
+  font-family: var(--font-mono);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--correct);
+  letter-spacing: 0.03em;
+  box-shadow: 0 2px 6px rgba(27, 36, 48, 0.1);
+}
+
+/* Optional: if your JS adds class="low" or "critical" to #timer when time
+   is running short, these colors kick in automatically. Safe to leave
+   unused if you don't add that logic. */
+#timer.low {
+  color: var(--warning);
+  border-color: var(--warning);
+}
+#timer.critical {
+  color: var(--incorrect);
+  border-color: var(--incorrect);
+  animation: pulse 1s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.06); }
+}
+@media (prefers-reduced-motion: reduce) {
+  #timer.critical { animation: none; }
+}
+
+/* ---- The main question/results card ---- */
+#app {
+  background: var(--paper-card);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 32px 28px;
+  box-shadow: 0 1px 3px rgba(27, 36, 48, 0.06);
+}
+
+/* ---- Typography inside the app ---- */
+#app h2 {
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.35;
+  margin: 0 0 20px;
+  color: var(--ink);
+}
+
+#app h2:not(:first-child) {
+  /* the percent-score heading on the results screen */
+  font-size: 2rem;
+  margin-top: -8px;
+}
+
+#app h3 {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  margin: 24px 0 4px;
+}
+
+/* Pass / fail coloring: relies on the text content "Passed" / "Failed" */
+#app h3 {
+  display: inline-block;
+  padding: 4px 14px;
+  border-radius: 6px;
+}
+
+#app p {
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+  margin: 0 0 24px;
+}
+
+/* ---- Buttons ---- */
+#app button {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 13px 16px;
+  margin: 0 0 10px;
+  font-family: inherit;
+  font-size: 1rem;
+  color: var(--ink);
+  background: var(--paper);
+  border: 1.5px solid var(--line);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease, transform 0.1s ease;
+}
+
+#app button:hover {
+  border-color: var(--accent);
+  background: #f4f6fb;
+}
+
+#app button:active {
+  transform: translateY(1px);
+}
+
+#app button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Submit / action buttons (Submit, Save score, Play again, Review mistakes,
+   Back to results) get the solid accent treatment instead of the plain
+   choice-button look. Targeted by their usual text via attribute isn't
+   possible in pure CSS, so give these a consistent bold style by being the
+   LAST button in a group — works for your current structure (submit /
+   action buttons are always appended after their inputs). If you want to
+   guarantee this, add class="primary" to those specific buttons in JS. */
+#app button.primary,
+#app input[type="text"] + button {
+  text-align: center;
+  width: auto;
+  min-width: 140px;
+  color: #fff;
+  background: var(--accent);
+  border-color: var(--accent);
+  font-weight: 600;
+}
+#app button.primary:hover,
+#app input[type="text"] + button:hover {
+  background: var(--accent-dark);
+  border-color: var(--accent-dark);
+}
+
+/* ---- Text input (short-answer questions, name-for-highscore) ---- */
+#app input[type="text"] {
+  width: 100%;
+  padding: 12px 14px;
+  margin-bottom: 10px;
+  font-family: inherit;
+  font-size: 1rem;
+  color: var(--ink);
+  background: var(--paper);
+  border: 1.5px solid var(--line);
+  border-radius: 8px;
+  outline: none;
+  transition: border-color 0.15s ease;
+}
+#app input[type="text"]:focus {
+  border-color: var(--accent);
+}
+
+/* ---- Small screens ---- */
+@media (max-width: 480px) {
+  body {
+    padding-top: 70px; /* room for the fixed timer badge above the card */
+  }
+  #timer {
+    top: 12px;
+    right: 12px;
+  }
+  #timer:not(:empty) {
+    padding: 4px 12px;
+    font-size: 1rem;
+  }
+  #app {
+    padding: 24px 18px;
+  }
+  #app h2 {
+    font-size: 1.3rem;
+  }
+  #app button.primary,
+  #app input[type="text"] + button {
+    width: 100%;
+  }
+}
